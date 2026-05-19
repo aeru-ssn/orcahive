@@ -1,0 +1,1868 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>ORCAHIVE – Student Commission Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- LOGIN -->
+    <div id="login-screen" class="login-page">
+      <div class="login-card">
+        <div class="login-logo-wrap">
+          <img
+            src="orcahive-logo.png"
+            width="80"
+            height="80"
+            style="object-fit: contain"
+          />
+          <div style="text-align: center">
+            <div
+              style="
+                font-family: var(--font-display);
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 3px;
+                color: var(--hive-muted);
+              "
+            >
+              THE
+            </div>
+            <div
+              style="
+                font-family: var(--font-display);
+                font-size: 26px;
+                font-weight: 800;
+                letter-spacing: 2px;
+              "
+            >
+              ORCA<span style="color: var(--hive-orange)">HIVE</span>
+            </div>
+          </div>
+        </div>
+        <div class="login-title">Welcome back</div>
+        <div class="login-sub">STI Ortigas–Cainta Student Marketplace</div>
+        <div class="sti-badge">
+          <i class="ti ti-school" style="font-size: 16px"></i>STI students only
+          — use your school email
+        </div>
+        <div class="form-group">
+          <label class="form-label">STI Email / Student ID</label
+          ><input
+            class="form-input"
+            type="email"
+            placeholder="2021-00001@sti.edu.ph"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label
+          ><input
+            class="form-input"
+            type="password"
+            placeholder="Enter your password"
+          />
+        </div>
+        <div style="text-align: right; margin-bottom: 16px">
+          <span
+            style="font-size: 12px; color: var(--hive-orange); cursor: pointer"
+            >Forgot password?</span
+          >
+        </div>
+        <button
+          class="btn-primary"
+          style="width: 100%; padding: 13px; font-size: 14px"
+          onclick="enterApp()"
+        >
+          Sign In to ORCAHIVE
+        </button>
+        <div class="divider"><span>new to the hive?</span></div>
+        <button
+          class="btn-outline"
+          style="
+            width: 100%;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font-body);
+          "
+          id="toggle-reg-btn"
+          onclick="toggleReg()"
+        >
+          Create an Account
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="main-app" class="app" style="display: none">
+      <!-- DRAWER -->
+      <div
+        class="drawer-overlay"
+        id="drawer-overlay"
+        onclick="closeDrawer()"
+      ></div>
+      <div class="drawer" id="drawer">
+        <div class="drawer-header">
+          <div style="display: flex; align-items: center; gap: 8px">
+            <img
+              src="orcahive-logo.png"
+              width="80"
+              height="80"
+              style="object-fit: contain"
+            />
+            <span
+              style="
+                font-family: var(--font-display);
+                font-weight: 800;
+                font-size: 15px;
+              "
+              >THE <span style="color: var(--hive-orange)">ORCA</span>HIVE</span
+            >
+          </div>
+          <div class="drawer-close" onclick="closeDrawer()">
+            <i class="ti ti-x" style="font-size: 15px"></i>
+          </div>
+        </div>
+        <div class="drawer-body">
+          <div class="drawer-section">Menu</div>
+          <button
+            class="sidebar-item"
+            onclick="
+              navigate('dashboard');
+              closeDrawer();
+            "
+          >
+            <i class="ti ti-layout-dashboard"></i>Dashboard
+          </button>
+          <button
+            class="sidebar-item"
+            onclick="
+              navigate('browse');
+              closeDrawer();
+            "
+          >
+            <i class="ti ti-compass"></i>Browse Services
+          </button>
+          <button
+            class="sidebar-item"
+            onclick="
+              navigate('post-service');
+              closeDrawer();
+            "
+          >
+            <i class="ti ti-plus-circle"></i>Post a Service
+          </button>
+          <button
+            class="sidebar-item"
+            onclick="
+              navigate('transactions');
+              closeDrawer();
+            "
+          >
+            <i class="ti ti-refresh"></i>Transactions
+            <span class="sidebar-badge">3</span>
+          </button>
+          <button
+            class="sidebar-item"
+            onclick="
+              navigate('messages');
+              closeDrawer();
+            "
+          >
+            <i class="ti ti-message-2"></i>Messages
+            <span class="sidebar-badge">2</span>
+          </button>
+          <div class="drawer-section">Account</div>
+          <button
+            class="sidebar-item"
+            onclick="
+              navigate('profile');
+              closeDrawer();
+            "
+          >
+            <i class="ti ti-user"></i>My Profile
+          </button>
+          <button
+            class="sidebar-item"
+            onclick="
+              navigate('notifications');
+              closeDrawer();
+            "
+          >
+            <i class="ti ti-bell"></i>Notifications
+          </button>
+          <button
+            class="sidebar-item"
+            onclick="
+              navigate('admin');
+              closeDrawer();
+            "
+          >
+            <i class="ti ti-shield"></i>Admin Panel
+          </button>
+          <div style="flex: 1; min-height: 16px"></div>
+          <button
+            class="sidebar-item"
+            onclick="
+              logout();
+              closeDrawer();
+            "
+          >
+            <i class="ti ti-logout"></i>Sign Out
+          </button>
+        </div>
+      </div>
+
+      <!-- FILTER BOTTOM SHEET -->
+      <div
+        class="filter-overlay"
+        id="filter-overlay"
+        onclick="closeFilter()"
+      ></div>
+      <div class="filter-sheet" id="filter-sheet">
+        <div class="filter-handle"></div>
+        <div class="filter-sheet-title">Filters</div>
+        <div
+          style="
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--hive-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+          "
+        >
+          Category
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 18px;
+          "
+        >
+          <label class="filter-checkbox"
+            ><input type="checkbox" checked data-filter="cat" value="all" />All
+            Categories</label
+          >
+          <label class="filter-checkbox"
+            ><input type="checkbox" data-filter="cat" value="design" />Graphic
+            Design</label
+          >
+          <label class="filter-checkbox"
+            ><input
+              type="checkbox"
+              data-filter="cat"
+              value="programming"
+            />Programming</label
+          >
+          <label class="filter-checkbox"
+            ><input
+              type="checkbox"
+              data-filter="cat"
+              value="tutoring"
+            />Tutoring</label
+          >
+          <label class="filter-checkbox"
+            ><input type="checkbox" data-filter="cat" value="video" />Video
+            Editing</label
+          >
+          <label class="filter-checkbox"
+            ><input type="checkbox" data-filter="cat" value="writing" />Academic
+            Writing</label
+          >
+        </div>
+        <div
+          style="
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--hive-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+          "
+        >
+          Max Price
+        </div>
+        <input
+          type="range"
+          id="mobile-price-range"
+          min="0"
+          max="1000"
+          value="1000"
+          style="width: 100%; margin-bottom: 4px"
+          oninput="
+            document.getElementById('mobile-price-val').textContent = this.value
+          "
+        />
+        <div class="price-range-display">
+          ₱0 <span id="mobile-price-val">₱1000</span>
+        </div>
+        <div
+          style="
+            margin-top: 18px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--hive-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+          "
+        >
+          Min Rating
+        </div>
+        <div
+          class="star-rating-filter"
+          id="mobile-star-filter"
+          onclick="setMobileStar(event)"
+        >
+          <span data-star="1">★</span><span data-star="2">★</span
+          ><span data-star="3">★</span><span data-star="4">★</span
+          ><span data-star="5">★</span>
+        </div>
+        <button
+          class="btn-primary"
+          style="width: 100%; padding: 13px; margin-top: 20px"
+          onclick="applyMobileFilter()"
+        >
+          Apply Filters
+        </button>
+      </div>
+
+      <!-- TRANSACTION RECEIPT MODAL -->
+      <div class="modal-overlay" id="receipt-modal">
+        <div class="modal" id="receipt-modal-content">
+          <div class="modal-header">
+            <div class="modal-title" id="receipt-modal-title">
+              Transaction Details
+            </div>
+            <div class="modal-close" onclick="closeModal('receipt-modal')">
+              <i class="ti ti-x" style="font-size: 14px"></i>
+            </div>
+          </div>
+          <div class="modal-body" id="receipt-modal-body"></div>
+        </div>
+      </div>
+
+      <!-- SERVICE DETAIL MODAL -->
+      <div class="modal-overlay" id="service-modal">
+        <div class="modal" id="service-modal-content">
+          <div class="modal-header">
+            <div class="modal-title" id="service-modal-title">
+              Service Details
+            </div>
+            <div class="modal-close" onclick="closeModal('service-modal')">
+              <i class="ti ti-x" style="font-size: 14px"></i>
+            </div>
+          </div>
+          <div class="modal-body" id="service-modal-body"></div>
+        </div>
+      </div>
+
+      <!-- NAV -->
+      <nav>
+        <div class="nav-brand" onclick="navigate('dashboard')">
+          <img
+            src="orcahive-logo.png"
+            width="60"
+            height="60"
+            style="object-fit: contain"
+          />
+          <span class="brand-name"
+            >THE <span class="accent">ORCA</span>HIVE</span
+          >
+        </div>
+        <div class="nav-center">
+          <button class="nav-link active" onclick="navigate('dashboard')">
+            Dashboard
+          </button>
+          <button class="nav-link" onclick="navigate('browse')">Browse</button>
+          <button class="nav-link" onclick="navigate('messages')">
+            Messages
+          </button>
+        </div>
+        <div class="nav-right">
+          <div class="notif-btn" onclick="navigate('notifications')">
+            <i class="ti ti-bell" style="font-size: 16px"></i>
+            <div class="notif-dot"></div>
+          </div>
+          <div class="user-avatar" onclick="navigate('profile')">JD</div>
+          <div class="hamburger" onclick="openDrawer()">
+            <i class="ti ti-menu-2" style="font-size: 18px"></i>
+          </div>
+        </div>
+      </nav>
+
+      <div class="layout">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+          <div class="sidebar-section">Menu</div>
+          <button class="sidebar-item active" onclick="navigate('dashboard')">
+            <i class="ti ti-layout-dashboard"></i>Dashboard
+          </button>
+          <button class="sidebar-item" onclick="navigate('browse')">
+            <i class="ti ti-compass"></i>Browse Services
+          </button>
+          <button class="sidebar-item" onclick="navigate('post-service')">
+            <i class="ti ti-plus-circle"></i>Post a Service
+          </button>
+          <button class="sidebar-item" onclick="navigate('transactions')">
+            <i class="ti ti-refresh"></i>Transactions<span class="sidebar-badge"
+              >3</span
+            >
+          </button>
+          <button class="sidebar-item" onclick="navigate('messages')">
+            <i class="ti ti-message-2"></i>Messages<span class="sidebar-badge"
+              >2</span
+            >
+          </button>
+          <div class="sidebar-section">Account</div>
+          <button class="sidebar-item" onclick="navigate('profile')">
+            <i class="ti ti-user"></i>My Profile
+          </button>
+          <button class="sidebar-item" onclick="navigate('notifications')">
+            <i class="ti ti-bell"></i>Notifications
+          </button>
+          <button class="sidebar-item" onclick="navigate('admin')">
+            <i class="ti ti-shield"></i>Admin Panel
+          </button>
+          <div class="sidebar-spacer"></div>
+          <button class="sidebar-item" onclick="logout()">
+            <i class="ti ti-logout"></i>Sign Out
+          </button>
+        </div>
+
+        <div class="main" id="main-scroll">
+          <!-- DASHBOARD -->
+          <div class="page active" id="page-dashboard">
+            <div class="hero">
+              <img
+                src="orcahive-logo.png"
+                width="100"
+                height="100"
+                style="object-fit: contain"
+              />
+              <div class="hero-tag">
+                <i class="ti ti-hexagon-filled" style="font-size: 11px"></i>STI
+                Ortigas–Cainta Exclusive
+              </div>
+              <h1>Welcome to the<br /><span class="accent">ORCA</span>HIVE</h1>
+              <p>
+                Your student-powered commission marketplace. Find talent, offer
+                services, and grow your campus career.
+              </p>
+              <div class="hero-actions">
+                <button class="btn-primary" onclick="navigate('browse')">
+                  Explore Services
+                </button>
+                <button class="btn-outline" onclick="navigate('post-service')">
+                  Offer a Service
+                </button>
+              </div>
+            </div>
+            <div class="stats-row">
+              <div class="stat-card">
+                <div class="stat-num">247</div>
+                <div class="stat-label">Active Commissioners</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num">1,084</div>
+                <div class="stat-label">Services Listed</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num">3,921</div>
+                <div class="stat-label">Completed Projects</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num" style="font-size: 17px">
+                  4.8
+                  <span style="color: var(--hive-accent); font-size: 15px"
+                    >★</span
+                  >
+                </div>
+                <div class="stat-label">Platform Rating</div>
+              </div>
+            </div>
+            <div class="section-header">
+              <span class="section-title">Categories</span>
+            </div>
+            <div class="categories">
+              <div class="cat-pill active" onclick="setActive(this)">
+                <i class="ti ti-layout-grid"></i>All
+              </div>
+              <div class="cat-pill" onclick="setActive(this)">
+                <i class="ti ti-palette"></i>Design
+              </div>
+              <div class="cat-pill" onclick="setActive(this)">
+                <i class="ti ti-code"></i>Programming
+              </div>
+              <div class="cat-pill" onclick="setActive(this)">
+                <i class="ti ti-book"></i>Tutoring
+              </div>
+              <div class="cat-pill" onclick="setActive(this)">
+                <i class="ti ti-video"></i>Video
+              </div>
+              <div class="cat-pill" onclick="setActive(this)">
+                <i class="ti ti-pencil"></i>Writing
+              </div>
+              <div class="cat-pill" onclick="setActive(this)">
+                <i class="ti ti-music"></i>Music
+              </div>
+            </div>
+            <div class="section-header">
+              <span class="section-title">Trending Services</span>
+              <button class="see-all" onclick="navigate('browse')">
+                See all →
+              </button>
+            </div>
+            <div class="services-grid" id="dashboard-grid"></div>
+          </div>
+
+          <!-- BROWSE -->
+          <div class="page" id="page-browse">
+            <div class="search-wrap">
+              <i class="ti ti-search"></i
+              ><input
+                class="search-input"
+                id="browse-search"
+                placeholder="Search services, skills, commissioners…"
+                oninput="applyBrowseFilter()"
+              />
+            </div>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 14px;
+                gap: 8px;
+              "
+            >
+              <span
+                style="
+                  font-size: 13px;
+                  color: var(--hive-muted);
+                  flex-shrink: 0;
+                "
+                ><strong style="color: var(--hive-text)" id="browse-count"
+                  >6</strong
+                >
+                services</span
+              >
+              <div style="display: flex; gap: 8px; align-items: center">
+                <button
+                  id="browse-filter-btn"
+                  style="
+                    display: none;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 8px 13px;
+                    background: var(--hive-card);
+                    border: 1px solid var(--hive-border);
+                    border-radius: 8px;
+                    color: var(--hive-text);
+                    font-size: 12px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-family: var(--font-body);
+                  "
+                  onclick="openFilter()"
+                >
+                  <i class="ti ti-filter" style="font-size: 14px"></i>Filter
+                </button>
+                <select
+                  class="form-input"
+                  style="width: auto; padding: 8px 12px; font-size: 12px"
+                  id="browse-sort"
+                  onchange="applyBrowseFilter()"
+                >
+                  <option value="popular">Most Popular</option>
+                  <option value="price-asc">Price: Low–High</option>
+                  <option value="price-desc">Price: High–Low</option>
+                  <option value="rating">Highest Rated</option>
+                </select>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: flex-start">
+              <div class="browse-sidebar" style="width: 200px; flex-shrink: 0">
+                <div class="card-block">
+                  <div class="card-block-title">
+                    <i class="ti ti-filter"></i>Filters
+                  </div>
+                  <div
+                    style="
+                      font-size: 10px;
+                      font-weight: 700;
+                      color: var(--hive-muted);
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Category
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      gap: 5px;
+                      margin-bottom: 14px;
+                    "
+                  >
+                    <label class="filter-checkbox"
+                      ><input
+                        type="checkbox"
+                        id="f-all"
+                        checked
+                        onchange="toggleAllFilter(this)"
+                      />All</label
+                    >
+                    <label class="filter-checkbox"
+                      ><input
+                        type="checkbox"
+                        class="cat-filter"
+                        value="design"
+                        onchange="applyBrowseFilter()"
+                      />Graphic Design</label
+                    >
+                    <label class="filter-checkbox"
+                      ><input
+                        type="checkbox"
+                        class="cat-filter"
+                        value="programming"
+                        onchange="applyBrowseFilter()"
+                      />Programming</label
+                    >
+                    <label class="filter-checkbox"
+                      ><input
+                        type="checkbox"
+                        class="cat-filter"
+                        value="tutoring"
+                        onchange="applyBrowseFilter()"
+                      />Tutoring</label
+                    >
+                    <label class="filter-checkbox"
+                      ><input
+                        type="checkbox"
+                        class="cat-filter"
+                        value="video"
+                        onchange="applyBrowseFilter()"
+                      />Video Editing</label
+                    >
+                    <label class="filter-checkbox"
+                      ><input
+                        type="checkbox"
+                        class="cat-filter"
+                        value="writing"
+                        onchange="applyBrowseFilter()"
+                      />Writing</label
+                    >
+                    <label class="filter-checkbox"
+                      ><input
+                        type="checkbox"
+                        class="cat-filter"
+                        value="music"
+                        onchange="applyBrowseFilter()"
+                      />Music</label
+                    >
+                    <label class="filter-checkbox"
+                      ><input
+                        type="checkbox"
+                        class="cat-filter"
+                        value="data"
+                        onchange="applyBrowseFilter()"
+                      />Data / Excel</label
+                    >
+                  </div>
+                  <div
+                    style="
+                      font-size: 10px;
+                      font-weight: 700;
+                      color: var(--hive-muted);
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Max Price (₱)
+                  </div>
+                  <input
+                    type="range"
+                    id="desktop-price-range"
+                    min="0"
+                    max="1000"
+                    value="1000"
+                    style="width: 100%; margin-bottom: 4px"
+                    oninput="
+                      document.getElementById('desktop-price-val').textContent =
+                        '₱' + this.value;
+                      applyBrowseFilter();
+                    "
+                  />
+                  <div class="price-range-display">
+                    ₱0 <span id="desktop-price-val">₱1000</span>
+                  </div>
+                  <div
+                    style="
+                      margin-top: 14px;
+                      font-size: 10px;
+                      font-weight: 700;
+                      color: var(--hive-muted);
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Min Rating
+                  </div>
+                  <div
+                    class="star-rating-filter"
+                    id="desktop-star-filter"
+                    onclick="setDesktopStar(event)"
+                  >
+                    <span data-star="1">★</span><span data-star="2">★</span
+                    ><span data-star="3">★</span><span data-star="4">★</span
+                    ><span data-star="5">★</span>
+                  </div>
+                  <button
+                    class="btn-sm btn-sm-outline"
+                    style="width: 100%; margin-top: 14px; text-align: center"
+                    onclick="resetFilters()"
+                  >
+                    Reset Filters
+                  </button>
+                </div>
+              </div>
+              <div style="flex: 1; min-width: 0">
+                <div class="services-grid" id="browse-grid"></div>
+                <div
+                  class="no-results"
+                  id="browse-no-results"
+                  style="display: none"
+                >
+                  <i class="ti ti-search-off"></i>
+                  <div style="font-weight: 600; margin-bottom: 4px">
+                    No services found
+                  </div>
+                  <div style="font-size: 12px">
+                    Try adjusting your filters or search term
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- POST SERVICE -->
+          <div class="page" id="page-post-service">
+            <div class="page-title">Post a Service</div>
+            <div class="page-sub">
+              List your skills and earn commissions from fellow STI students.
+            </div>
+            <div class="card-block">
+              <div class="card-block-title">
+                <i class="ti ti-info-circle"></i>Service Details
+              </div>
+              <div class="form-group">
+                <label class="form-label">Service Title</label
+                ><input
+                  class="form-input"
+                  placeholder="e.g. Custom Logo Design for Organizations"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label
+                ><select class="form-input">
+                  <option>Graphic Design</option>
+                  <option>Programming</option>
+                  <option>Tutoring</option>
+                  <option>Video Editing</option>
+                  <option>Academic Writing</option>
+                  <option>Music Production</option>
+                  <option>Data Analysis</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Description</label
+                ><textarea
+                  class="form-input"
+                  rows="4"
+                  placeholder="Describe your service, process, delivery time, and requirements…"
+                  style="resize: vertical"
+                ></textarea>
+              </div>
+              <div class="two-input-row">
+                <div class="form-group">
+                  <label class="form-label">Min Price (₱)</label
+                  ><input
+                    class="form-input"
+                    type="number"
+                    placeholder="150"
+                    inputmode="numeric"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Max Price (₱)</label
+                  ><input
+                    class="form-input"
+                    type="number"
+                    placeholder="500"
+                    inputmode="numeric"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="card-block">
+              <div class="card-block-title"><i class="ti ti-tags"></i>Tags</div>
+              <input
+                class="form-input"
+                placeholder="logo, branding, design (separate with commas)"
+              />
+            </div>
+            <div class="card-block">
+              <div class="card-block-title">
+                <i class="ti ti-photo"></i>Portfolio Samples
+              </div>
+              <div
+                style="
+                  border: 2px dashed var(--hive-border);
+                  border-radius: 10px;
+                  padding: 28px 16px;
+                  text-align: center;
+                  cursor: pointer;
+                "
+              >
+                <i
+                  class="ti ti-cloud-upload"
+                  style="
+                    font-size: 30px;
+                    color: var(--hive-muted);
+                    margin-bottom: 10px;
+                    display: block;
+                  "
+                ></i>
+                <div style="font-size: 13px; color: var(--hive-muted)">
+                  Tap to
+                  <span style="color: var(--hive-orange); font-weight: 600"
+                    >browse files</span
+                  >
+                </div>
+                <div
+                  style="
+                    font-size: 11px;
+                    color: var(--hive-muted);
+                    margin-top: 5px;
+                  "
+                >
+                  PNG, JPG up to 10MB
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap">
+              <button
+                class="btn-primary"
+                style="flex: 1; min-width: 140px; padding: 13px"
+              >
+                Publish Service
+              </button>
+              <button
+                class="btn-outline"
+                style="
+                  flex: 1;
+                  min-width: 120px;
+                  padding: 13px;
+                  border-radius: 8px;
+                  font-family: var(--font-body);
+                  cursor: pointer;
+                  font-weight: 500;
+                "
+              >
+                Save Draft
+              </button>
+            </div>
+          </div>
+
+          <!-- TRANSACTIONS -->
+          <div class="page" id="page-transactions">
+            <div class="page-title">Transactions</div>
+            <div class="page-sub">
+              Tap any transaction to view its full receipt and details.
+            </div>
+            <div class="tabs">
+              <button class="tab-btn active" onclick="filterTx('all', this)">
+                All
+              </button>
+              <button class="tab-btn" onclick="filterTx('pending', this)">
+                Pending
+              </button>
+              <button class="tab-btn" onclick="filterTx('ongoing', this)">
+                Ongoing
+              </button>
+              <button class="tab-btn" onclick="filterTx('completed', this)">
+                Completed
+              </button>
+              <button class="tab-btn" onclick="filterTx('cancelled', this)">
+                Cancelled
+              </button>
+            </div>
+            <!-- Desktop -->
+            <div
+              class="card-block tx-desktop"
+              style="padding: 0; overflow: hidden"
+              id="tx-desktop-block"
+            >
+              <div class="tx-scroll">
+                <table class="tx-table">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th>Role</th>
+                      <th>Amount</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tx-desktop-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+            <!-- Mobile -->
+            <div id="tx-mobile-list"></div>
+            <div class="no-results" id="tx-no-results" style="display: none">
+              <i class="ti ti-receipt-off"></i>
+              <div style="font-weight: 600; margin-bottom: 4px">
+                No transactions found
+              </div>
+              <div style="font-size: 12px">
+                No transactions match this filter
+              </div>
+            </div>
+          </div>
+
+          <!-- MESSAGES -->
+          <div class="page" id="page-messages" style="padding: 14px">
+            <div class="messages-layout" id="messages-layout">
+              <div class="convo-list">
+                <div class="convo-search">
+                  <input
+                    class="form-input"
+                    placeholder="Search…"
+                    style="font-size: 13px; padding: 8px 10px; width: 100%"
+                  />
+                </div>
+                <div class="convo-item active" onclick="openChat(event)">
+                  <div
+                    class="convo-avatar"
+                    style="background: var(--hive-orange); color: #1a0a00"
+                  >
+                    MR
+                  </div>
+                  <div class="convo-info">
+                    <div class="convo-name">Maria Reyes</div>
+                    <div class="convo-preview">
+                      Sure! I'll send the draft tonight.
+                    </div>
+                  </div>
+                  <div class="convo-time">2m</div>
+                </div>
+                <div class="convo-item" onclick="openChat(event)">
+                  <div
+                    class="convo-avatar"
+                    style="background: #378add; color: white"
+                  >
+                    CL
+                  </div>
+                  <div class="convo-info">
+                    <div class="convo-name">Carlo Lim</div>
+                    <div class="convo-preview">
+                      Can you send your code files?
+                    </div>
+                  </div>
+                  <div class="convo-time">1h</div>
+                </div>
+                <div class="convo-item" onclick="openChat(event)">
+                  <div
+                    class="convo-avatar"
+                    style="background: #d4537e; color: white"
+                  >
+                    JG
+                  </div>
+                  <div class="convo-info">
+                    <div class="convo-name">Josh Garcia</div>
+                    <div class="convo-preview">
+                      The video is ready for review!
+                    </div>
+                  </div>
+                  <div class="convo-time">3h</div>
+                </div>
+                <div class="convo-item" onclick="openChat(event)">
+                  <div
+                    class="convo-avatar"
+                    style="background: #639922; color: white"
+                  >
+                    AS
+                  </div>
+                  <div class="convo-info">
+                    <div class="convo-name">Ana Santos</div>
+                    <div class="convo-preview">
+                      When are you free for a session?
+                    </div>
+                  </div>
+                  <div class="convo-time">Yesterday</div>
+                </div>
+              </div>
+              <div class="chat-area">
+                <div class="chat-header">
+                  <button class="chat-back" onclick="closeChat()">
+                    <i class="ti ti-arrow-left" style="font-size: 20px"></i>
+                  </button>
+                  <div
+                    class="convo-avatar"
+                    style="
+                      background: var(--hive-orange);
+                      color: #1a0a00;
+                      width: 32px;
+                      height: 32px;
+                      font-size: 11px;
+                      flex-shrink: 0;
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-weight: 700;
+                    "
+                  >
+                    MR
+                  </div>
+                  <div>
+                    <div style="font-weight: 600; font-size: 13px">
+                      Maria Reyes
+                    </div>
+                    <div
+                      style="
+                        font-size: 11px;
+                        color: #639922;
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                      "
+                    >
+                      <span
+                        style="
+                          width: 6px;
+                          height: 6px;
+                          background: #639922;
+                          border-radius: 50%;
+                          display: inline-block;
+                        "
+                      ></span
+                      >Online
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      margin-left: auto;
+                      display: flex;
+                      gap: 10px;
+                      color: var(--hive-muted);
+                    "
+                  >
+                    <i
+                      class="ti ti-phone"
+                      style="font-size: 18px; cursor: pointer"
+                    ></i
+                    ><i
+                      class="ti ti-dots-vertical"
+                      style="font-size: 18px; cursor: pointer"
+                    ></i>
+                  </div>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                  <div class="msg them">
+                    <div class="msg-bubble">
+                      Hi! I saw your commission request. What brand vibe are you
+                      going for?
+                    </div>
+                    <div class="msg-time">2:15 PM</div>
+                  </div>
+                  <div class="msg me">
+                    <div class="msg-bubble">
+                      Hey Maria! Clean and modern. Black + orange for ORCAHIVE.
+                    </div>
+                    <div class="msg-time">2:17 PM</div>
+                  </div>
+                  <div class="msg them">
+                    <div class="msg-bubble">
+                      Love that combo! Do you have any reference logos?
+                    </div>
+                    <div class="msg-time">2:18 PM</div>
+                  </div>
+                  <div class="msg me">
+                    <div class="msg-bubble">
+                      Yes! Budget is around ₱300–₱400.
+                    </div>
+                    <div class="msg-time">2:20 PM</div>
+                  </div>
+                  <div class="msg them">
+                    <div class="msg-bubble">
+                      Perfect! I'll send the first draft tonight. 🎨
+                    </div>
+                    <div class="msg-time">2:21 PM</div>
+                  </div>
+                </div>
+                <div class="chat-input-row">
+                  <button class="attach-btn">
+                    <i class="ti ti-paperclip" style="font-size: 16px"></i>
+                  </button>
+                  <input
+                    class="chat-input"
+                    placeholder="Type a message…"
+                    id="chat-in"
+                    onkeydown="if (event.key === 'Enter') sendMsg();"
+                  />
+                  <button class="chat-send" onclick="sendMsg()">
+                    <i class="ti ti-send" style="font-size: 16px"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROFILE -->
+          <div class="page" id="page-profile">
+            <div class="profile-hero">
+              <div class="profile-top">
+                <div class="profile-avatar-lg">JD</div>
+                <div class="profile-info" style="flex: 1">
+                  <h2>Juan Dela Cruz</h2>
+                  <div class="profile-meta">
+                    <span
+                      ><i class="ti ti-school" style="font-size: 12px"></i>STI
+                      Ortigas–Cainta</span
+                    >
+                    <span
+                      ><i
+                        class="ti ti-star-filled"
+                        style="font-size: 12px; color: var(--hive-accent)"
+                      ></i
+                      >4.8 Rating</span
+                    >
+                    <span
+                      ><i
+                        class="ti ti-check-circle"
+                        style="font-size: 12px; color: #639922"
+                      ></i
+                      >12 Done</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <p
+                style="
+                  font-size: 13px;
+                  color: var(--hive-muted);
+                  line-height: 1.65;
+                  margin-bottom: 12px;
+                "
+              >
+                Graphic design student passionate about branding, UI, and visual
+                storytelling. Available weekends and after class.
+              </p>
+              <div class="skills-wrap" style="margin-bottom: 14px">
+                <span class="skill-tag hot">Logo Design</span
+                ><span class="skill-tag hot">Branding</span>
+                <span class="skill-tag">Illustrator</span
+                ><span class="skill-tag">Photoshop</span
+                ><span class="skill-tag">Figma</span>
+              </div>
+              <div class="profile-actions">
+                <button
+                  class="btn-primary"
+                  style="padding: 9px 20px; font-size: 13px"
+                >
+                  Edit Profile
+                </button>
+                <button
+                  class="btn-outline"
+                  style="
+                    padding: 9px 18px;
+                    border-radius: 8px;
+                    font-size: 13px;
+                    font-family: var(--font-body);
+                    cursor: pointer;
+                    font-weight: 500;
+                  "
+                >
+                  Share
+                </button>
+              </div>
+            </div>
+            <div class="two-col">
+              <div>
+                <div class="card-block">
+                  <div class="card-block-title">
+                    <i class="ti ti-photo"></i>Portfolio
+                  </div>
+                  <div class="portfolio-grid">
+                    <div
+                      class="portfolio-item"
+                      style="
+                        background: linear-gradient(135deg, #2a2010, #3d2e10);
+                      "
+                    >
+                      🎨
+                    </div>
+                    <div
+                      class="portfolio-item"
+                      style="
+                        background: linear-gradient(135deg, #1f1025, #2d1838);
+                      "
+                    >
+                      🖼️
+                    </div>
+                    <div
+                      class="portfolio-item"
+                      style="
+                        background: linear-gradient(135deg, #0f1a2a, #162a40);
+                      "
+                    >
+                      💡
+                    </div>
+                    <div
+                      class="portfolio-item"
+                      style="
+                        background: linear-gradient(135deg, #1a2510, #253a18);
+                      "
+                    >
+                      ✏️
+                    </div>
+                    <div
+                      class="portfolio-item"
+                      style="
+                        background: linear-gradient(135deg, #25180f, #3a2510);
+                      "
+                    >
+                      🎭
+                    </div>
+                    <div
+                      class="portfolio-item"
+                      style="
+                        background: var(--hive-surface);
+                        border: 2px dashed var(--hive-border);
+                        color: var(--hive-muted);
+                        font-size: 22px;
+                      "
+                    >
+                      +
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="card-block">
+                  <div class="card-block-title">
+                    <i class="ti ti-star"></i>Recent Reviews
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 12px">
+                    <div
+                      style="
+                        border-bottom: 1px solid var(--hive-border);
+                        padding-bottom: 12px;
+                      "
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          align-items: center;
+                          gap: 8px;
+                          margin-bottom: 6px;
+                        "
+                      >
+                        <div
+                          style="
+                            width: 26px;
+                            height: 26px;
+                            border-radius: 50%;
+                            background: #639922;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 10px;
+                            font-weight: 700;
+                            color: #1a0a00;
+                          "
+                        >
+                          LC
+                        </div>
+                        <span style="font-size: 12px; font-weight: 600"
+                          >Leon Cruz</span
+                        >
+                        <span
+                          style="
+                            margin-left: auto;
+                            color: var(--hive-accent);
+                            font-size: 13px;
+                          "
+                          >★★★★★</span
+                        >
+                      </div>
+                      <p
+                        style="
+                          font-size: 12px;
+                          color: var(--hive-muted);
+                          line-height: 1.5;
+                        "
+                      >
+                        "Super professional and fast!"
+                      </p>
+                    </div>
+                    <div>
+                      <div
+                        style="
+                          display: flex;
+                          align-items: center;
+                          gap: 8px;
+                          margin-bottom: 6px;
+                        "
+                      >
+                        <div
+                          style="
+                            width: 26px;
+                            height: 26px;
+                            border-radius: 50%;
+                            background: #d4537e;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 10px;
+                            font-weight: 700;
+                            color: white;
+                          "
+                        >
+                          RA
+                        </div>
+                        <span style="font-size: 12px; font-weight: 600"
+                          >Rosa Alvarado</span
+                        >
+                        <span
+                          style="
+                            margin-left: auto;
+                            color: var(--hive-accent);
+                            font-size: 13px;
+                          "
+                          >★★★★<span style="color: var(--hive-border)"
+                            >★</span
+                          ></span
+                        >
+                      </div>
+                      <p
+                        style="
+                          font-size: 12px;
+                          color: var(--hive-muted);
+                          line-height: 1.5;
+                        "
+                      >
+                        "Great event poster work!"
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NOTIFICATIONS -->
+          <div class="page" id="page-notifications">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 18px;
+                flex-wrap: wrap;
+                gap: 10px;
+              "
+              class="notif-flex"
+            >
+              <div>
+                <div class="page-title">Notifications</div>
+                <div class="page-sub" style="margin-bottom: 0">
+                  Stay on top of your commissions.
+                </div>
+              </div>
+              <button
+                class="btn-outline"
+                style="
+                  padding: 8px 14px;
+                  border-radius: 8px;
+                  font-size: 12px;
+                  font-family: var(--font-body);
+                  cursor: pointer;
+                "
+              >
+                Mark all read
+              </button>
+            </div>
+            <div class="notif-panel">
+              <div class="notif-item unread">
+                <div
+                  class="notif-icon"
+                  style="background: var(--hive-orange-dim)"
+                >
+                  <i
+                    class="ti ti-message-2"
+                    style="color: var(--hive-orange); font-size: 18px"
+                  ></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-text">
+                    <strong>Maria Reyes</strong> sent you a message about your
+                    logo commission.
+                  </div>
+                  <div class="notif-time">2 minutes ago</div>
+                </div>
+                <div class="unread-dot"></div>
+              </div>
+              <div class="notif-item unread">
+                <div
+                  class="notif-icon"
+                  style="background: rgba(99, 153, 34, 0.15)"
+                >
+                  <i
+                    class="ti ti-check-circle"
+                    style="color: #639922; font-size: 18px"
+                  ></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-text">
+                    Your commission with <strong>Nina Pascual</strong> has been
+                    marked complete.
+                  </div>
+                  <div class="notif-time">1 hour ago</div>
+                </div>
+                <div class="unread-dot"></div>
+              </div>
+              <div class="notif-item">
+                <div
+                  class="notif-icon"
+                  style="background: rgba(245, 180, 55, 0.12)"
+                >
+                  <i
+                    class="ti ti-star"
+                    style="color: var(--hive-accent); font-size: 18px"
+                  ></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-text">
+                    <strong>Leon Cruz</strong> left you a 5-star review!
+                  </div>
+                  <div class="notif-time">3 hours ago</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div
+                  class="notif-icon"
+                  style="background: var(--hive-orange-dim)"
+                >
+                  <i
+                    class="ti ti-briefcase"
+                    style="color: var(--hive-orange); font-size: 18px"
+                  ></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-text">
+                    New commission request from <strong>Marco Reyes</strong> —
+                    Poster Design, ₱250.
+                  </div>
+                  <div class="notif-time">Yesterday, 4:30 PM</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div
+                  class="notif-icon"
+                  style="background: rgba(226, 75, 74, 0.12)"
+                >
+                  <i
+                    class="ti ti-alert-triangle"
+                    style="color: #e24b4a; font-size: 18px"
+                  ></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-text">
+                    Your commission with <strong>Josh Garcia</strong> was
+                    cancelled.
+                  </div>
+                  <div class="notif-time">2 days ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADMIN -->
+          <div class="page" id="page-admin">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 18px;
+              "
+            >
+              <div
+                style="
+                  background: var(--hive-orange-dim);
+                  border-radius: 10px;
+                  width: 36px;
+                  height: 36px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  flex-shrink: 0;
+                "
+              >
+                <i
+                  class="ti ti-shield"
+                  style="color: var(--hive-orange); font-size: 18px"
+                ></i>
+              </div>
+              <div>
+                <div class="page-title" style="margin-bottom: 0">
+                  Admin Panel
+                </div>
+                <div style="font-size: 12px; color: var(--hive-muted)">
+                  Manage users, reports, platform
+                </div>
+              </div>
+            </div>
+            <div class="admin-grid">
+              <div class="admin-card">
+                <div
+                  class="admin-icon"
+                  style="background: var(--hive-orange-dim)"
+                >
+                  <i class="ti ti-users" style="color: var(--hive-orange)"></i>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 18px;
+                      font-weight: 700;
+                    "
+                  >
+                    1,240
+                  </div>
+                  <div style="font-size: 11px; color: var(--hive-muted)">
+                    Users
+                  </div>
+                </div>
+              </div>
+              <div class="admin-card">
+                <div
+                  class="admin-icon"
+                  style="background: rgba(56, 136, 221, 0.15)"
+                >
+                  <i class="ti ti-briefcase" style="color: #378add"></i>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 18px;
+                      font-weight: 700;
+                    "
+                  >
+                    1,084
+                  </div>
+                  <div style="font-size: 11px; color: var(--hive-muted)">
+                    Listings
+                  </div>
+                </div>
+              </div>
+              <div class="admin-card">
+                <div
+                  class="admin-icon"
+                  style="background: rgba(99, 153, 34, 0.15)"
+                >
+                  <i class="ti ti-check" style="color: #639922"></i>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 18px;
+                      font-weight: 700;
+                    "
+                  >
+                    3,921
+                  </div>
+                  <div style="font-size: 11px; color: var(--hive-muted)">
+                    Completed
+                  </div>
+                </div>
+              </div>
+              <div class="admin-card">
+                <div
+                  class="admin-icon"
+                  style="background: rgba(226, 75, 74, 0.12)"
+                >
+                  <i class="ti ti-flag" style="color: #e24b4a"></i>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 18px;
+                      font-weight: 700;
+                    "
+                  >
+                    7
+                  </div>
+                  <div style="font-size: 11px; color: var(--hive-muted)">
+                    Reports
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="two-col">
+              <div class="card-block">
+                <div class="card-block-title">
+                  <i class="ti ti-flag"></i>Pending Reports
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      padding: 10px;
+                      background: var(--hive-surface);
+                      border-radius: 8px;
+                    "
+                  >
+                    <i
+                      class="ti ti-alert-circle"
+                      style="color: #e24b4a; font-size: 16px; flex-shrink: 0"
+                    ></i>
+                    <div style="flex: 1; min-width: 0">
+                      <div
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          margin-bottom: 2px;
+                        "
+                      >
+                        Inappropriate listing
+                      </div>
+                      <div style="font-size: 11px; color: var(--hive-muted)">
+                        2 users · #0421
+                      </div>
+                    </div>
+                    <button class="btn-sm btn-sm-primary">Review</button>
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      padding: 10px;
+                      background: var(--hive-surface);
+                      border-radius: 8px;
+                    "
+                  >
+                    <i
+                      class="ti ti-alert-circle"
+                      style="color: #ef9f27; font-size: 16px; flex-shrink: 0"
+                    ></i>
+                    <div style="flex: 1; min-width: 0">
+                      <div
+                        style="
+                          font-size: 12px;
+                          font-weight: 600;
+                          margin-bottom: 2px;
+                        "
+                      >
+                        Spam requests
+                      </div>
+                      <div style="font-size: 11px; color: var(--hive-muted)">
+                        @fake_acc_88 · 5 reports
+                      </div>
+                    </div>
+                    <button class="btn-sm btn-sm-primary">Review</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-block">
+                <div class="card-block-title">
+                  <i class="ti ti-users"></i>Recent Registrations
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px">
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <div
+                      style="
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        background: var(--hive-orange);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 11px;
+                        font-weight: 700;
+                        color: #1a0a00;
+                        flex-shrink: 0;
+                      "
+                    >
+                      RM
+                    </div>
+                    <div style="flex: 1; min-width: 0">
+                      <div style="font-size: 12px; font-weight: 600">
+                        Rosa Montoya
+                      </div>
+                      <div
+                        style="
+                          font-size: 11px;
+                          color: var(--hive-muted);
+                          overflow: hidden;
+                          text-overflow: ellipsis;
+                          white-space: nowrap;
+                        "
+                      >
+                        2023-00112@sti.edu.ph
+                      </div>
+                    </div>
+                    <span
+                      class="status-badge status-completed"
+                      style="font-size: 10px; padding: 2px 8px; flex-shrink: 0"
+                      >Verified</span
+                    >
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <div
+                      style="
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        background: #378add;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 11px;
+                        font-weight: 700;
+                        color: white;
+                        flex-shrink: 0;
+                      "
+                    >
+                      BT
+                    </div>
+                    <div style="flex: 1; min-width: 0">
+                      <div style="font-size: 12px; font-weight: 600">
+                        Ben Torres
+                      </div>
+                      <div
+                        style="
+                          font-size: 11px;
+                          color: var(--hive-muted);
+                          overflow: hidden;
+                          text-overflow: ellipsis;
+                          white-space: nowrap;
+                        "
+                      >
+                        2024-00045@sti.edu.ph
+                      </div>
+                    </div>
+                    <span
+                      class="status-badge status-pending"
+                      style="font-size: 10px; padding: 2px 8px; flex-shrink: 0"
+                      >Pending</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end .main -->
+      </div>
+      <!-- end .layout -->
+
+      <!-- BOTTOM NAV -->
+      <div class="bottom-nav">
+        <button
+          class="bottom-nav-item active"
+          id="bn-dashboard"
+          onclick="navigate('dashboard')"
+        >
+          <i class="ti ti-layout-dashboard"></i><span>Home</span>
+        </button>
+        <button
+          class="bottom-nav-item"
+          id="bn-browse"
+          onclick="navigate('browse')"
+        >
+          <i class="ti ti-compass"></i><span>Browse</span>
+        </button>
+        <button
+          class="bottom-nav-item"
+          id="bn-post-service"
+          onclick="navigate('post-service')"
+          style="position: relative"
+        >
+          <div
+            style="
+              width: 44px;
+              height: 44px;
+              background: var(--hive-orange);
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: absolute;
+              top: -16px;
+              border: 3px solid var(--hive-black);
+            "
+          >
+            <i class="ti ti-plus" style="font-size: 22px; color: #1a0a00"></i>
+          </div>
+          <span style="margin-top: 30px; font-size: 10px">Post</span>
+        </button>
+        <button
+          class="bottom-nav-item"
+          id="bn-messages"
+          onclick="navigate('messages')"
+          style="position: relative"
+        >
+          <i class="ti ti-message-2"></i><span>Messages</span>
+          <div class="bottom-nav-dot"></div>
+        </button>
+        <button
+          class="bottom-nav-item"
+          id="bn-profile"
+          onclick="navigate('profile')"
+        >
+          <i class="ti ti-user"></i><span>Profile</span>
+        </button>
+      </div>
+    </div>
+    <!-- end #main-app -->
+
+    <script src="ORCA.js"></script>
+  </body>
+</html>
